@@ -1,0 +1,271 @@
+---
+output:
+  html_document:
+    css: FA10_Rosales.css
+
+title: "FA10 Rosales, Frances Aneth"
+---
+
+
+# No. 1 Problem: 
+
+<b> GIVEN </b> <br>
+ A random variable X is said to have the gamma distribution, or to be gamma distributed, if the density function is 
+\begin{equation}
+f(x)=
+    \begin{cases}
+        \frac{x\alpha^{-1}e^{-x/\beta}}{\beta^{\alpha}\Gamma(\alpha)} & \text{if } x > 0\\
+        0 & \text{if } x \leq 0
+    \end{cases} \quad (\alpha,\beta >0)
+\end{equation}
+where 
+$\Gamma(\alpha)$
+ is the gamma function. Show that the mean and variance of the gamma distribution are given by...
+
+
+<button onclick="hideoutput()" style="background: #e8ccd7;"> 
+HIDE/SHOW
+</button>
+<div id="codeinputhere" style="display:block;">
+
+```{r one, fig.html=TRUE}
+
+gamma_density <- function(x, alpha, beta) {
+  if (x <= 0) {
+    0
+  } else {
+  return(x * alpha^(-1) * exp(-x/beta) / (beta^alpha * gamma(alpha)))
+  }
+
+}
+
+alpha <- 5
+beta <- 3
+mu <- alpha * beta
+sigma_squared <- alpha * beta^2
+
+cat("The mean of the gamma distribution is :", mu, "\n")
+cat("The variance of the gamma distribution is:", sigma_squared, "\n")
+
+```
+</div>
+<script>
+function hideoutput() {
+  var x = document.getElementById("codeinputhere");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+    
+    
+  } else {
+    x.style.display = "block";
+  }
+}
+</script>
+
+
+# RESULT PROOF 
+<b> a.) $\mu = \alpha \beta$ : </b>
+
+Using the piecewise function, we constructed a code using conditional statement wherein 
+
+if (x <= 0) 
+we have a return value 0
+
+while if x is greater than 0 then we will use this equation 
+
+\begin{equation} \frac{x\alpha^{-1}e^{-x/\beta}}{\beta^{\alpha}\Gamma(\alpha)}\end{equation}
+
+As we set
+
+$\alpha = 5$
+$\beta = 3$
+
+$\Rightarrow \mu = \alpha \beta$
+
+$\Rightarrow \alpha  \times \beta$
+
+$\Rightarrow 5 \times 3 = 15$
+
+$\therefore \mu = 15$
+
+<br>
+
+<b> b.) $\sigma^2=\alpha \beta^2$: </b>
+
+The variance is given by:
+
+$\alpha = 5$
+$\beta = 3$
+
+$\Rightarrow \sigma^2=\alpha \beta^2$:
+
+$\Rightarrow \alpha \times \beta^2$:
+
+$\Rightarrow 5 \times 3^2$:
+
+$\Rightarrow 5 \times 9$:
+
+$\therefore \sigma^2= 45$:
+
+<br> <br>
+
+# No. 2 Problem: 
+
+Prove that the mean and variance of a binomially distributed random variable are, respectively 
+
+
+For Instance, we are flipping 20 coins  in each time, and thus each coin accumulate a probability of 0.5, with a given we can flipped the coins for 10000 times to get more accurate value of probability. 
+
+Given: 
+
+$n=20$ (number of trials) 
+
+$p=0.5$ (Probability of Getting Heads or Tails)
+
+$k=10000$ (Times of Flipping Coins)
+
+
+
+<button onclick="hideoutput3()" style="background: #e8ccd7;"> 
+HIDE/SHOW
+</button>
+<div id="codeinputhere2" style="display:block;">
+
+```{r two, fig.html=TRUE}
+n <- 20
+p <- 0.5
+
+
+#Given Values
+u <- n * p
+q <- 1-p
+
+sigma_2 <- n * p * q
+
+# Print the results
+cat("Mean:", u, "\n")
+cat("Variance:", sigma_2)
+
+
+
+cat("PROOF AND CONFIMATION")
+
+mean_coin <- mean (rbinom(10000, n, p))
+
+var_coin <- var(rbinom(10000, n, p))
+
+
+cat("The Mean of the binomial distribution is:", mean_coin, "\n")
+cat("Such that Mean = u = n * p = ", u, "\n")
+
+cat("The Variance of the binomial distribution is :", var_coin)
+
+cat("Such that Variance= sigma^2 = n * p * q =", sigma_2)
+
+```
+</div>
+<script>
+function hideoutput3() {
+  var x = document.getElementById("codeinputhere2");
+  if (x.style.display === "block") {
+    x.style.display = "none";
+    
+    
+  } else {
+    x.style.display = "block";
+  }
+}
+</script>
+
+
+```{r no1_plot, fig.html=TRUE}
+par(bg = "#d9d1c4")
+plot(0, type="n", xlim=c(0,1), ylim=c(0,1), xlab="", ylab="", axes=FALSE)
+text(x=0.5, y=0.5, labels=paste0("The Mean of the Binomial Distribution =", mean_coin, "\n","Such that Mean = u = n * p = ", u, "\n"), col="#bb5989", cex=1)
+box(col="#778979", lty="dotted")
+```
+
+
+```{r no2_plot, fig.html=TRUE}
+par(bg = "#d9d1c4")
+plot(0, type="n", xlim=c(0,1), ylim=c(0,1), xlab="", ylab="", axes=FALSE)
+text(x=0.5, y=0.5, labels=paste0("The Variance of the binomial distribution = ",(round(var_coin, 4)) , "\n","Such that Variance= sigma^2 = n * p * q =", sigma_2, "\n"), col="#bb5989", cex=1)
+box(col="#778979", lty="dotted")
+```
+
+
+
+
+# RESULT PROOF
+<b> a.) $\mu = np$ </b>
+
+$n=20$ 
+
+$p=0.5$ 
+
+$\Rightarrow \mu = n \times p$
+
+$\Rightarrow n \times p$
+
+$\Rightarrow 20 \times 0.5$
+
+$\therefore \mu = 10$
+
+
+
+<b> b.) $\sigma^2 = n \times p \times q$  </b>
+
+$n=20$ 
+
+$p=0.5$ 
+
+$\Rightarrow \sigma^2 = n \times p \times q$
+
+$\Rightarrow  q=1-p$ such at Probability of Failure (Complement of P. Success)
+
+$\Rightarrow \sigma^2 = n \times p \times (1-p)$
+
+
+$\Rightarrow 20 \times 0.5 \times (1-0.5)$
+
+$\therefore \sigma^2 = 5$
+
+$\therefore \sigma = \sqrt5$
+
+
+<br> <br>
+
+# No. 3 Problem: 
+
+ Establish the validity of the Poisson approximation to the binomial distribution.  
+ 
+ Suppose we are tossing a coin 100 times, and we want to know the probability of getting exactly 50 TAILS. Given that this accumulates 0.5 probability, we will show the validity of the Poisson approximation to the binomial distribution. 
+```{r three, fig.html=TRUE}
+n <- 100
+p <- 0.5
+u <- n * p
+
+bino_dis <- pbinom(50, n, p)
+
+pois_appro <- ppois(50, u)
+
+cat("Getting 50 TAILS Successes by Binomial Distribution:", bino_dis, "\n")
+cat("Getting 50 TAILS Successes by Poisson Approximation:", pois_appro, "\n")
+
+
+
+
+```
+
+```{r no3_plot, fig.html=TRUE}
+par(bg = "#d9d1c4")
+plot(0, type="n", xlim=c(0,1), ylim=c(0,1), xlab="", ylab="", axes=FALSE)
+text(x=0.5, y=0.5, labels=paste0("50 TAILS by Binomial Distribution:", (round(bino_dis, 4)), "\n","50 TAILS Poisson Approximation:", (round(pois_appro, 4)), "\n"), col="#bb5989", cex=1)
+box(col="#778979", lty="dotted")
+```
+
+
+$\therefore$
+As desired we aim to get the probability of 50 Tails using both the binomial distribution (using pbinom) and the Poisson approximation (using ppois). 
+Therefore, we also accumulate similar probabilities that says that we Establish the Validity of the two. 
+
